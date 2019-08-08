@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using RussianСertification.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using RussianСertification.Models;
 
 namespace RussianСertification
 {
@@ -37,8 +38,12 @@ namespace RussianСertification
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
+
             services.AddDefaultIdentity<IdentityUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
+
+            //services.AddIdentity< RussianСertification.Models.User, IdentityRole>()
+            //   .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
