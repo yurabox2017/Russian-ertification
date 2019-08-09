@@ -1,11 +1,11 @@
-﻿@model IEnumerable<User>
+﻿@model IEnumerable<Microsoft.AspNetCore.Identity.IdentityUser>
 @{
     ViewBag.Title = "Список пользователей";
 }
 <div class="jumbotron">
 
     <a asp-action="Create">Добавить пользователя</a>
-
+    <a asp-controller="Roles" asp-action="Index">Добавить роль</a>
     <table class="table">
         <tr><th>Email</th><th>Год</th><th></th></tr>
         @foreach (var user in Model)
@@ -19,7 +19,8 @@
                         <button type="submit" class="btn btn-sm btn-danger">
                             Удалить
                         </button>
-                        <a class="btn btn-sm btn-primary" asp-controller="Roles" asp-action="UserList" asp-route-id="@user.Id">Добавить роль</a>
+                        <a class="btn btn-sm btn-primary" asp-controller="Roles" asp-action="Edit" asp-route-userid="@user.Id">Права доступа</a>
+
                     </form>
                 </td>
             </tr>

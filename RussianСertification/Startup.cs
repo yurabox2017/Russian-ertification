@@ -39,11 +39,16 @@ namespace RussianСertification
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDefaultIdentity<IdentityUser>()
-                .AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            //services.AddIdentity< RussianСertification.Models.User, IdentityRole>()
+            //services.AddIdentity<IdentityUser, IdentityRole>()
             //   .AddEntityFrameworkStores<ApplicationDbContext>();
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                  .AddRoleManager<RoleManager<IdentityRole>>()
+                  .AddDefaultUI()
+                  .AddDefaultTokenProviders()
+                  .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }

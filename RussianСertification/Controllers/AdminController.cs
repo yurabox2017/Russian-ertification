@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using RussianСertification.Data;
 using RussianСertification.Models;
+using Microsoft.AspNetCore.Identity;
 
 
 namespace RussianСertification.Controllers
@@ -18,19 +19,9 @@ namespace RussianСertification.Controllers
         {
             _context = context;
         }
-        //[Authorize(Roles = "admin")]
-        //public IActionResult Index()
-        //{
-        //    var users = _context.Users.ToList();
-        //    //  Users.userslist = _context.Users.ToList();
-        //    //return Content(users[0].ToString());
 
-        //    return View(users);
-        //}
-
-        // GET: Contacts
+        // GET: users
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Index() => View(await _context.Users.ToListAsync());
-
-
     }
 }

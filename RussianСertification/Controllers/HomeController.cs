@@ -11,7 +11,7 @@ namespace RussianСertification.Controllers
 {
     public class HomeController : Controller
     {
-        //[Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin,офис")]
         public IActionResult Index()
         {
             return View();
