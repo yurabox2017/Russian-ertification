@@ -1,3 +1,11 @@
-﻿@{
+﻿@*@{ Layout = "_Layout";}*@
+
+@if (!User.IsInRole("гость"))
+{
     Layout = "_Layout";
 }
+else
+{
+    Layout = "_LayoutGuest";
+}
+

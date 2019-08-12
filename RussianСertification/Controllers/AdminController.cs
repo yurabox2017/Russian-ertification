@@ -21,7 +21,7 @@ namespace RussianСertification.Controllers
         }
 
         // GET: users
-        [Authorize(Roles = "admin")]
+        //[Authorize(Roles = "admin")]
         public async Task<IActionResult> Index() => View(await _context.Users.ToListAsync());
     }
 }

@@ -19,6 +19,7 @@ namespace RussianСertification.Areas.Identity.Pages.Account
             _userManager = userManager;
         }
 
+        [HttpPost]
         public async Task<IActionResult> OnGetAsync(string userId, string code)
         {
             if (userId == null || code == null)

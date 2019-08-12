@@ -23,13 +23,16 @@
     </environment>
 </head>
 <body>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; 2019 - Тестирование по русскому языку</p>
-        </footer>
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-collapse collapse">
+                <partial name="_LoginPartial" />
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        <h4>Обратитесь к администратору для получения прав доступа!</h4>
     </div>
-    @RenderSection("Scripts", required: false)
+    @RenderBody()
 </body>
 </html>

@@ -79,26 +79,30 @@ namespace RussianСertification.Areas.Identity.Pages.Account
 
                         var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-                        var callbackUrl = Url.Action(
-                           "ConfirmEmail",
-                           "Account",
-                           new { userId = user.Id, code = code },
-                           protocol: HttpContext.Request.Scheme);
-                        EmailService emailService = new EmailService();
-                        await emailService.SendEmailAsync(Input.Email, "Confirm your account",
-                            $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>link</a>");
+                        //var callbackUrl = Url.Action(
+                        //   "ConfirmEmail",
+                        //   "Account",
+                        //   new { userId = user.Id, code = code },
+                        //   protocol: HttpContext.Request.Scheme);
+                        //EmailService emailService = new EmailService();
+                        //await emailService.SendEmailAsync(Input.Email, "Confirm your account",
+                        //    $": <a href='{callbackUrl}'>link</a>");
 
-                        //var callbackUrl = Url.Page(
-                        //    "/Account/ConfirmEmail",
-                        //    pageHandler: null,
-                        //    values: new { userId = user.Id, code = code },
-                        //    protocol: Request.Scheme);
+                        var callbackUrl = Url.Page(
+                            "/Account/ConfirmEmail",
+                            pageHandler: null,
+                            values: new { userId = user.Id, code = code },
+                            protocol: Request.Scheme);
+                        EmailService _emailService = new EmailService();
+                        await _emailService.SendEmailAsync(Input.Email, "Confirm your email",
+                            $"Подтвердите регистрацию, перейдя по ссылке: <a href='{callbackUrl}'>здесь</a>.");
 
-                        //await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        //    $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                   //     await _signInManager.SignInAsync(user, isPersistent: false); //авто подтверждение почты
 
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        return LocalRedirect(returnUrl);
+                        await _userManager.AddToRoleAsync(user, "гость");
+
+                        return Content("Для завершения регистрации проверьте электронную почту и перейдите по ссылке, указанной в письме");
+                        // return LocalRedirect(returnUrl);
                     }
                 }
                 catch (Exception ex)
@@ -108,7 +112,7 @@ namespace RussianСertification.Areas.Identity.Pages.Account
                     //foreach (var error in ex.Data)
                     //{
 
-  
+
                     //}
                 }
             }
