@@ -6,6 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\lib\bootstrap\dist_backup\**" />
+    <Content Remove="wwwroot\lib\bootstrap\dist_backup\**" />
+    <EmbeddedResource Remove="wwwroot\lib\bootstrap\dist_backup\**" />
+    <None Remove="wwwroot\lib\bootstrap\dist_backup\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MailKit" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.App" />
     <PackageReference Include="Microsoft.AspNetCore.Razor.Design" Version="2.1.2" PrivateAssets="All" />
@@ -14,6 +21,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="wwwroot\webcamjs\" />
   </ItemGroup>
 
 </Project>
