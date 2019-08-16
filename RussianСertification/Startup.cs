@@ -39,10 +39,6 @@ namespace RussianСertification
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-    //        services.AddDbContext<MobileContext>(options =>
-    //options.UseSqlServer(
-    //    Configuration.GetConnectionString("DefaultConnection")));
-
             //services.AddDefaultIdentity<IdentityUser>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>();
 

@@ -18,6 +18,7 @@ namespace RussianСertification.Controllers
             _roleManager = roleManager;
             _userManager = userManager;
         }
+
         public IActionResult Index() => View(_roleManager.Roles.ToList());
 
         public IActionResult Create() => View();
@@ -43,6 +44,7 @@ namespace RussianСertification.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(string id)
         {
             IdentityRole role = await _roleManager.FindByIdAsync(id);
@@ -77,6 +79,7 @@ namespace RussianСertification.Controllers
             return NotFound();
         }
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string userId, List<string> roles)
         {
             // получаем пользователя

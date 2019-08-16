@@ -21,7 +21,20 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Services\" />
+    <Folder Include="Views\RecordRTC\" />
     <Folder Include="wwwroot\webcamjs\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="RecordRTC_to_ASPNETMVC">
+      <HintPath>bin\RecordRTC_to_ASPNETMVC.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers">
+      <HintPath>bin\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages">
+      <HintPath>bin\System.Web.WebPages.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>
