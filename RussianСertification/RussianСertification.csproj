@@ -23,6 +23,7 @@
     <Folder Include="Areas\Identity\Services\" />
     <Folder Include="Views\RecordRTC\" />
     <Folder Include="wwwroot\webcamjs\" />
+    <Folder Include="uploads\" />
   </ItemGroup>
 
   <ItemGroup>

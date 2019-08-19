@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.IO;
 using System.Linq;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -14,30 +17,55 @@ namespace RussianСertification.Controllers
         {
             return View();
         }
+        private IHostingEnvironment _hostingEnvironment;
+
+        public RecordRTCController(IHostingEnvironment environment)
+        {
+            _hostingEnvironment = environment;
+        }
+
         //[HttpPost]
-        //public IActionResult PostRecordedAudioVideo()
+        //public IActionResult PostRecordedAudioVideo(IList<IFormFile> formFile)
         //{
-        //    foreach (var upload in Request.Form.Files)
-        //    {
-        //        var path = AppDomain.CurrentDomain.BaseDirectory + "uploads/";
-        //        var file = Request.Form.Files[upload.FileName];
-        //        if (file == null) continue;
-
-        //        file.SaveAs(Path.Combine(path, Request.Form[0]));
-
-        //        StoreInFolder(file, filepath);
-        //    }
-        //    return Json(Request.Form[]);
+        //    foreach (IFormFile source in formFile)
+        //    { }
+        //    return this.View();
         //}
 
-        // ---/RecordRTC/DeleteFile
         [HttpPost]
-        public IActionResult DeleteFile()
+        public async Task<IActionResult> PostRecordedAudioVideo([FromForm] IList<IFormFile> formFile)
         {
-            var fileUrl = AppDomain.CurrentDomain.BaseDirectory + "uploads/" + Request.Form["delete-file"] + ".webm";
-            new FileInfo(fileUrl).Delete();
-            return Json(true);
+            var uploads = Path.Combine(_hostingEnvironment.WebRootPath, "uploads");
+            foreach (var file in formFile)
+            {
+                if (file.Length > 0)
+                {
+                    string filename = ContentDispositionHeaderValue.Parse(formFile[0].ContentDisposition).FileName.Trim('"');
+                    var filePath = Path.Combine(uploads, file.FileName) + ".webm";
+                    //using (FileStream fs = System.IO.File.Create(filePath))
+                    //{
+                    //    file.CopyTo(fs);
+                    //    fs.Flush();
+                    //}
+                    using (var fileStream = new FileStream(filePath, FileMode.Create))
+                    {
+                        //  file.CopyTo(fileStream);
+                        await file.CopyToAsync(fileStream);
+                    }
+                }
+            }
+            return View();
+            // return Json(Request.Form["0"]);
         }
+
+        // ---/RecordRTC/DeleteFile
+        //[HttpPost]
+        //public IActionResult DeleteFile()
+        //{
+        //    var fileUrl = AppDomain.CurrentDomain.BaseDirectory + "uploads/" + Request.Form["delete-file"] + ".webm";
+        //    new FileInfo(fileUrl).Delete();
+        //    return Json(true);
+        //}
 
         private void StoreInFolder(IFormFile file, string fileName)
         {
